@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+  <!--act window for SWOT-->
+  <record id="action_swot_module" model="ir.actions.act_window">
+      <field name="name">SWOT Analysis</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">swot.swot</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+              Click here to add new SWOT.
+          </p>
+      </field>
+  </record>
+
+  <!--Main Dashboard Menu-->
+  <menuitem id="swot_menu_master" name="SWOT Analysis" groups="base.group_user" action="action_swot_module"/>
+  <!--Main menu for swot-->
+  <menuitem id="menu_swot"
+            name="SWOT"
+            parent="swot_menu_master"
+            action="action_swot_module"
+            sequence="1"/>
+
+  <!--Tree view for SWOT-->
+  <record id="swot_tree_view" model="ir.ui.view">
+      <field name="name">SWOT</field>
+      <field name="model">swot.swot</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+          <tree>
+              <field name="swot_name"/>
+              <field name="swot_date"/>
+              <field name="swot_of"/>
+              <field name="swot_version"/>
+          </tree>
+      </field>
+  </record>
+  <!--  Filter view -->
+  <record id="swot_tree_filter" model="ir.ui.view">
+    <field name="name">swot.filter</field>
+    <field name="model">swot.swot</field>
+    <field name="arch" type="xml">
+      <search>
+        <filter string="Individual" name="filter_swot_individual" domain="[('swot_of','=','individual')]"/>
+        <filter string="Department" name="filter_swot_department" domain="[('swot_of','=','department')]"/>
+        <filter string="Company" name="filter_swot_company" domain="[('swot_of','=','company')]"/>
+      </search>
+    </field>
+  </record>
+
+<!-- Search view -->
+<record model="ir.ui.view" id="swot_search_view">
+    <field name="name">swot.search</field>
+    <field name="model">swot.swot</field>
+    <field name="type">search</field>
+
+    <field name="arch" type="xml">
+        <search>
+            <field name="swot_name"/>
+            <field name="swot_of"/>
+            <field name="swot_date"/>
+
+        </search>
+    </field>
+</record>
+
+
+
+  <!--Form view for swot-->
+  <record id="swot_form_view" model="ir.ui.view">
+      <field name="name">swot</field>
+      <field name="model">swot.swot</field>
+      <field name="arch" type="xml">
+          <form>
+              <sheet>
+                  <group>
+                  <group name="group-top">
+                    <field name="swot_of"/>
+                    <field name="individual_id" attrs="{'invisible':[('swot_of','in', ['department','company'])]}"/>
+                    <field name="department_id" attrs="{'invisible':[('swot_of','in', ['individual','company'])]}"/>
+                    <field name="company_id" attrs="{'invisible':[('swot_of','in', ['individual','department'])]}"/>
+
+                  </group>
+                      <group name="group-left">
+                          <field name="swot_name" placeholder="SWOT Name"/>
+                          <field name="swot_version"/>
+                      </group>
+                      <group name="group-right">
+                        <field name="swot_date"/>
+                      </group>
+
+                  </group>
+                  <notebook position="inside">
+                    <!-- page for strength -->
+                    <page string="Strengths">
+                      <field name="strength_ids" nolabel="1" mode="tree">
+                        <tree editable="true">
+                          <field name="name"/>
+                          <field name="importance"/>
+                          <field name="rating"/>
+                          <field name="score"/>
+                        </tree>
+                      </field>
+                    </page>
+                    <!--page for weakness -->
+                    <page string="Weaknesses">
+                      <field name="weakness_ids" nolabel="1" mode="tree">
+                        <tree editable="true">
+                          <field name="name"/>
+                          <field name="importance"/>
+                          <field name="rating"/>
+                          <field name="score" readonly="1"/>
+                        </tree>
+                      </field>
+                    </page>
+                    <!--page for opportunity -->
+                    <page string="Opportunities">
+                      <field name="opportunity_ids" nolabel="1" mode="tree">
+                        <tree editable="true">
+                          <field name="name"/>
+                          <field name="importance"/>
+                          <field name="probability"/>
+                          <field name="score" readonly="1"/>
+                        </tree>
+                      </field>
+                    </page>
+                    <!--page for threat-->
+                    <page string="Threats">
+                      <field name="threat_ids" nolabel="1" mode="tree">
+                        <tree editable="true">
+                          <field name="name"/>
+                          <field name="importance"/>
+                          <field name="probability"/>
+                          <field name="score"/>
+                        </tree>
+                      </field>
+                    </page>
+                  </notebook>
+              </sheet>
+          </form>
+      </field>
+  </record>
+</odoo>

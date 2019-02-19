@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+user_swot_swot,user_swot_swot,model_swot_swot,swot_module.group_swot_user,1,1,1,1
+user_swot_common_attributes,user_swot_common_attributes,model_swot_common_attributes,swot_module.group_swot_user,1,1,1,1
+user_swot_strength,user_swot_strength,model_swot_strength,swot_module.group_swot_user,1,1,1,1
+user_swot_weakness,user_swot_weakness,model_swot_weakness,swot_module.group_swot_user,1,1,1,1
+user_swot_opportunity,user_swot_opportunity,model_swot_opportunity,swot_module.group_swot_user,1,1,1,1
+user_swot_threat,user_swot_threat,model_swot_threat,swot_module.group_swot_user,1,1,1,1
+manager_swot_swot,manager_swot_swot,model_swot_swot,swot_module.group_swot_manager,1,1,1,1
+manager_swot_common_attributes,manager_swot_common_attributes,model_swot_common_attributes,swot_module.group_swot_manager,1,1,1,1
+manager_swot_strength,manager_swot_strength,model_swot_strength,swot_module.group_swot_manager,1,1,1,1
+manager_swot_weakness,manager_swot_weakness,model_swot_weakness,swot_module.group_swot_manager,1,1,1,1
+manager_swot_opportunity,manager_swot_opportunity,model_swot_opportunity,swot_module.group_swot_manager,1,1,1,1
+manager_swot_threat,manager_swot_threat,model_swot_threat,swot_module.group_swot_manager,1,1,1,1

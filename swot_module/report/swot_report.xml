@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_for_landscape" model="report.paperformat">
+        <field name="name">Landscape Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+    </record>
+    <report
+      id="swot_report"
+      string="SWOT Report"
+      model="swot.swot"
+      report_type="qweb-pdf"
+      name="swot_module.swot_report_template"
+      paperformat="paperformat_for_landscape"/>
+
+
+    <template id="swot_report_template">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="p">
+          <t t-call="web.internal_layout">
+           <div class="page">
+
+            <h4 style="text-align:center;">SWOT: <span t-field="p.swot_name"/></h4><br/>
+            <table class="table table-condensed table-bordered" width="100%">
+              <tr>
+                <td width="50%">Date : <b><span t-field="p.swot_date"/></b></td>
+                <td width="50%">Version : <b><span t-field="p.swot_version"/></b></td>
+              </tr>
+              <tr>
+                <td colspan="2" width="100%" align="center">
+                  <t t-if="p.individual_id">Person : <b><span t-field="p.individual_id"/></b></t>
+                  <t t-if="p.department_id">Department : <b><span t-field="p.department_id"/></b></t>
+                  <t t-if="p.company_id">Company : <b><span t-field="p.company_id"/></b></t>
+              </td>
+              </tr>
+            </table>
+
+            <table width="100%">
+              <tr>
+                <td style="border-top:0px;border-right:1px solid;border-bottom:1px solid;border-left:0px;" width="50%">
+                  <p align="center"><u>Strengths</u></p>
+                  <table class="table table-condensed table-bordered" width="100%">
+                        <tr>
+                            <th width="85%"><b>Strength</b></th>
+                            <th><b>Score</b></th>
+                        </tr>
+
+
+                        <t t-foreach="p.strength_ids" t-as="r">
+                        <tr>
+
+                        <td><span t-field="r.name"/></td>
+                        <td><span t-field="r.score"/></td>
+                        </tr>
+
+                        </t>
+                    </table>
+                  </td>
+                  <td width="50%" style="border-top:0px;border-right:0px;border-bottom:1px solid;border-left:1px solid;">
+                    <p align="center"><u>Weaknesses</u></p>
+                    <table class="table table-condensed table-bordered" width="100%">
+                      <tr>
+                          <th width="85%"><b>Weakness</b></th>
+                          <th><b>Score</b></th>
+                      </tr>
+
+                      <t t-foreach="p.weakness_ids" t-as="r">
+                      <tr>
+
+                      <td><span t-field="r.name"/></td>
+                      <td><span t-field="r.score"/></td>
+                      </tr>
+
+                      </t>
+                  </table>
+                </td>
+                </tr>
+
+                  <tr>
+                    <td width="50%" style="border-top:1px solid;border-right:1px solid;border-bottom:0px;border-left:0px;">
+                      <p align="center"><u>Threats</u></p>
+                      <table class="table table-condensed table-bordered" width="100%">
+                            <tr>
+                                <th width="85%"><b>Threats</b></th>
+                                <th><b>Score</b></th>
+                            </tr>
+
+
+                            <t t-foreach="p.threat_ids" t-as="r">
+                            <tr>
+
+                            <td><span t-field="r.name"/></td>
+                            <td><span t-field="r.score"/></td>
+                            </tr>
+
+                            </t>
+                            </table>
+                          </td>
+
+                    <td style="border-top:1px solid;border-right:0px;border-bottom:0px;border-left:1px solid;" width="50%">
+                      <p align="center"><u>Opportunities</u></p>
+                      <table class="table table-condensed table-bordered" width="100%">
+                          <tr>
+                            <th width="85%"><b>Opportunity</b></th>
+                            <th><b>Score</b></th>
+                        </tr>
+
+                    <t t-foreach="p.opportunity_ids" t-as="r">
+                    <tr>
+
+                    <td><span t-field="r.name"/></td>
+                    <td><span t-field="r.score"/></td>
+                    </tr>
+                    </t>
+                </table>
+              </td>
+
+                  </tr>
+                </table>
+                <hr width="100%"/>
+                <b>Note: </b>
+                <ul>
+                  <li>
+                    Score for <i>Strength</i> and <i>Weakness</i> is calculated as a product of <i>Importance</i> and <i>rating</i>
+                  </li>
+                  <li>
+                    Score for <i>Opportunity</i> and <i>Threat</i> is calculated as a product of <i>Importance</i> and <i>probability</i>
+                  </li>
+                </ul>
+          </div>
+
+        </t>
+       </t>
+    </t>
+  </template>
+</odoo>
