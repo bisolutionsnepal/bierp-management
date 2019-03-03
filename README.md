@@ -1,2 +1,2 @@
 # bierp-management
-Management Modules by BI Solutions
+Management Modules by BI Solutions.
